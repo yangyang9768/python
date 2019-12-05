@@ -6,12 +6,13 @@ import csv
 from collections import OrderedDict
 from typing import Any
 
+import random
 
 def read_data():
     data = []
 
-    with open('sales.csv', 'r') as sales_csv:
-        spreadsheet = csv.DictReader(sales_csv)
+    with open('Student_file.csv', 'r') as student_csv:
+        spreadsheet = csv.DictReader(student_csv)
         for row in spreadsheet:
             data.append(row)
     return data
@@ -19,16 +20,23 @@ def read_data():
 def run():
     data = read_data()
 
-    sales = []
+    students = []
     for row in data:
-        sale = int(row['sales'])
-        sales.append(sale)
+        student = row['name']
+        students.append(student)
 
-    total = sum(sales)
-    print('Total sales: {}'.format(total))
-
-    monthly_sales = []
-    for row in data:
-        print('Monthly Sales: {}'.format(int(row['sales'])))
+    return students
 
 run()
+
+def choose_house():
+    random_house = ['Gryffindor', 'Ravenclaw', 'Slytherin', 'Hufflepuff']
+    students = run()
+
+    chosen_house = random.choice(random_house)
+    chosen_student = random.choice(students)
+
+    print('Who has the next turn? {}'.format(chosen_student))
+    print('Which house are they in? {}'.format(chosen_house))
+
+choose_house()
